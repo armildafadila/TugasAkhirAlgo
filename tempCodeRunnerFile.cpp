@@ -1,142 +1,4 @@
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-using namespace std;
-
-struct motor
-{
-    char namaMtr[50];
-    char plat[15];
-    int tahun;
-    int harga;
-    char status[20];
-    char penyewa[60];
-    int total;
-    motor *next;
-};
-
-motor *head = NULL;
-
-//void simpanfile
-void simpanFile(){
-    FILE *fp = fopen("rentalMotor.txt", "w");
-
-    motor* bantu = head;
-    while (bantu != NULL) {
-        fprintf(fp, "%s;%s;%d;%d;%s;%s;%d\n",
-            bantu->namaMtr,
-            bantu->plat,
-            bantu->tahun,
-            bantu->harga,
-            bantu->status,
-            bantu->penyewa,
-            bantu->total);
-
-        bantu = bantu->next; // lanjut ke node berikutnya 
-    }
-    fclose(fp);
-}
-
-// LOAD FILE
-void loadfile() {
-    FILE *fp = fopen("rentalMotor.txt", "r"); //buka file untuk dibaca
-    if (fp == NULL) return; // gaada file keluar
-
-    while (true) {
-        motor* baru = new motor; //node baru
-
-        if (fscanf(fp, "%[^;];%[^;];%d;%d;%[^;];%[^;];%d\n",
-            baru->namaMtr, baru->plat, &baru->tahun, &baru->harga, baru->status, baru->penyewa, &baru->total)== EOF)
-            {
-                delete baru;
-                break;
-            }
-
-            baru->next = NULL; 
-
-            if(head == NULL) {
-                head = baru;
-            } else {
-                motor* bantu = head;
-                while (bantu->next != NULL){
-                    bantu = bantu->next;
-                }
-                bantu->next = baru;
-            }
-    }
-    fclose(fp);
-}
-
-//TAMBAH DATA
-void tambahData(){
-    motor* baru = new motor;
-
-    cout << "Nama Motor : "; 
-    cin.ignore();
-    cin.getline(baru->namaMtr, 80);
-    cout << "Plat : ";
-    cin >> baru->plat;
-    cout << "Tahun : ";
-    cin >> baru->tahun;
-    cout << "Harga : ";
-    cin >> baru->harga;
-
-    //defaultnya yang tampil
-    strcpy(baru->status, "tersedia"); 
-    strcpy(baru->penyewa, "-");
-    baru->total = 0;
-    baru->next = NULL;
-
-    //data baaru ditaruh di node terakhir
-    if(head == NULL){ // klo belum ada data
-        head = baru; // brt jadiin data pertama atau baru
-
-    } else {
-        motor* bantu = head;
-        while (bantu->next != NULL){
-            bantu = bantu->next;
-        }
-        bantu->next = baru;
-    }
-    cout << "Data berhasil ditambahkan! \n";
-    simpanFile(); // langsung simpan ke file
-}
-
-void hapusData(){
-    char hapus[60];
-    cout << "=============================" << endl;
-    cout << "      HAPUS DATA MOTOR       " << endl;
-    cout << "=============================" << endl;
-    cout << "Data motor yang ingin di hapus : ";
-    cin.ignore();
-    cin.getline(hapus, 80);
-
-    motor *bantu = head;
-    motor *prev = NULL;
-
-    while (bantu != NULL)
-    {
-        if(strcmp(bantu->namaMtr, hapus) == 0){
-            if (prev == NULL)
-                head = bantu->next;
-            else
-                prev->next = bantu->next;
-            
-            delete bantu;
-            cout << "Data Berhasil dihapus" << endl;
-            simpanFile();
-            return;
-        }
-        prev = bantu;
-        bantu = bantu->next;
-    }
-    cout << "Data tidak ada" << endl;
-}
-
-
 int main() {
-    loadfile();
-
     int pilih;
     int subpilih;
 
@@ -160,7 +22,6 @@ int main() {
         case 1 :  
         subpilih = 0;
             do{
-                cout << " KELOLA DATA MOTOR " << endl;
                 cout << "1. Tambah Data Motor" << endl;
                 cout << "2. Hapus Data Motor" << endl;
                 cout << "3. Kembali ke Menu Utama" << endl;
@@ -169,10 +30,10 @@ int main() {
                 switch (subpilih)
                 {
                 case 1:
-                    tambahData();
+                    // Tambah Data Motor
                     break;
                 case 2:
-                    hapusData();
+                    // Hapus Data Motor
                     break;
                 case 3:
                     // Kembali ke Menu Utama
@@ -186,8 +47,7 @@ int main() {
         
         case 2 :  
         subpilih = 0;
-            do{ 
-                cout << " TRANSAKSI SEWA MOTOR " << endl;
+            do{
                 cout << "1. Sewa Motor" << endl;
                 cout << "2. Kembalikan Motor" << endl;
                 cout << "3. Kembali ke Menu Utama" << endl;
@@ -215,7 +75,6 @@ int main() {
         case 3 :
         subpilih = 0;
         do{
-            cout << " PENCARIAN DATA MOTOR " << endl; 
             cout << "1. Cari Berdasarkan Nama Motor" << endl;
             cout << "2. Cari Berdasarkan Plat Nomor" << endl;
             cout << "3. Kembali Ke Menu Utama" << endl;    
@@ -243,7 +102,6 @@ int main() {
         case 4 :
         subpilih = 0;
         do{
-            cout << " URUTKAN DATA MOTOR " << endl; 
             cout << "1. Urutkan Berdasarkan Harga" << endl;
             cout << "2. Urutkan Berdasarkan Nomor Plat" << endl;
             cout << "3. Kembali Ke Menu Utama" << endl;    
@@ -272,8 +130,7 @@ int main() {
         break;
 
         case 5 :  
-            cout << "DATA MOTOR SAAT INI" << endl;
-            // Tampilkan Semua Data
+            // Tampilkan Semua Data Motor
         break;
         case 6 :  
             cout << "Terima kasih telah menggunakan sistem admin sewa motor!" << endl;
