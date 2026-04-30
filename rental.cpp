@@ -87,7 +87,7 @@ void tambahData(){
     baru->total = 0;
     baru->next = NULL;
 
-    //data baaru ditaruh di node terakhir
+    //data baaru ditaruh di node terakhir//sisip akhir
     if(head == NULL){ // klo belum ada data
         head = baru; // brt jadiin data pertama atau baru
 
