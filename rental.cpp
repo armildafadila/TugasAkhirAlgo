@@ -78,7 +78,7 @@ void tambahData(){
     cin >> baru->plat;
     cout << "Tahun : ";
     cin >> baru->tahun;
-    cout << "Harga : ";
+    cout << "Harga(/hari) : ";
     cin >> baru->harga;
 
     //defaultnya yang tampil
