@@ -234,13 +234,14 @@ int main() {
         cout << "==============================="<< endl;
         cout << "Pilih Menu: ";
         cin >> pilih;
+        cout << endl;
 
         switch (pilih)
         {
         case 1 :  
         subpilih = 0;
             do{
-                cout << " KELOLA DATA MOTOR " << endl;
+                cout << "KELOLA DATA MOTOR " << endl;
                 cout << "1. Tambah Data Motor" << endl;
                 cout << "2. Hapus Data Motor" << endl;
                 cout << "3. Kembali ke Menu Utama" << endl;
