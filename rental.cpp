@@ -172,6 +172,7 @@ void sewaMotor() {
     }
 
     cout << "Motor tidak ditemukan!\n";
+
 }
 
 //KEMBALI
@@ -241,7 +242,10 @@ int main() {
         case 1 :  
         subpilih = 0;
             do{
-                cout << "KELOLA DATA MOTOR " << endl;
+                cout << "======================"<< endl;
+                cout << "   KELOLA DATA MOTOR  " << endl;
+                cout << "======================"<< endl;
+                
                 cout << "1. Tambah Data Motor" << endl;
                 cout << "2. Hapus Data Motor" << endl;
                 cout << "3. Kembali ke Menu Utama" << endl;
