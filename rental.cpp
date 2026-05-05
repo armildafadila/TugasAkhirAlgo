@@ -182,9 +182,37 @@ void kembaliMotor(){
 
     motor* bantu = head;
 
-    while ()
+    while (bantu != NULL) {
+        if (strcmp(bantu->namaMtr, namaCari) == 0){
+
+            strcpy(bantu->status, "tersedia");
+            strcpy(bantu->penyewa, "-");
+            bantu->total = 0;
+
+            cout << "Motor Berhasil dikembalikan!\n";
+            simpanFile();
+            return;
+        }
+        bantu = bantu->next;
+    }
+
+    cout << "Motor tidak ditemukan!\n";
 }
 
+//TAMPIL DATA
+void tampil(){
+    motor* bantu = head;
+
+    cout << "============================================" << endl;
+    cout << "                 DATA MOTOR                 " << endl;
+    cout << "============================================" << endl;
+    
+    while (bantu != NULL){
+        cout << bantu->namaMtr << "|" <<bantu->plat << "|" << bantu->tahun << "|" << bantu->harga << "|" << bantu->status << "|" << bantu->penyewa << "|" << bantu->total << endl;
+
+        bantu = bantu->next;
+    }   
+}
 
 int main() {
     loadfile();
